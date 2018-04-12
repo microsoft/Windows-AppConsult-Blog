@@ -3,7 +3,7 @@
 ## Setting
 
 So, it happens from time to time that developers struggle with failed WACK results when they use platform-specific dependencies, such as SQLite-NET.
-These binaries only come in x86 and x64 flavor (e.g. through NuGet) but never platform-agnostic. I've put a simple WPF project on [GitHub](https://github.com/mplogas/Blog-AppConsult-SqliteSample) that saves some weather data into a local SQLite persistence. You will need a OpenWeatherMap API key that you can get from [here](https://openweathermap.org/appid).
+These binaries only come in x86 and x64 flavor (e.g. through NuGet) but never platform-agnostic. I've put a simple WPF project on [GitHub](https://github.com/Microsoft/Windows-AppConsult-Samples-DesktopBridge/tree/master/Blog-Sqlite) that saves some weather data into a local SQLite persistence. You will need a OpenWeatherMap API key that you can get from [here](https://openweathermap.org/appid).
 I will use this sample codebase to demonstrate the resulting issue and two possible solutions.
 
 ## The issue
@@ -51,7 +51,7 @@ The wizard will finally take you to an extra step to test the resulting package.
 
 ## The almost easy solution
 
-Well, but what if using Visual Studio 2017 is not an option for you? This is where PowerShell or the command line comes to the rescue! Before starting the packaging process, you will need to create a single build for each platform you want to support. This step is crucial! For the sake of brevity, I've only chosen the x64 architecture. My colleague Sebastien created some [extended tools](https://github.com/appconsult/DesktopBridgeTools) that can help you reducing the required steps to create the packages. You can find a detailed [blog post](https://blogs.msdn.microsoft.com/appconsult/2017/08/07/unpack-modify-repack-sign-appx/) in our AppConsult blog. I won't use these script in order to display the basic steps.
+Well, but what if using Visual Studio 2017 is not an option for you? This is where PowerShell or the command line comes to the rescue! Before starting the packaging process, you will need to create a single build for each platform you want to support. This step is crucial! For the sake of brevity, I've only chosen the x64 architecture. My colleague Sebastien created some [extended tools](https://github.com/Microsoft/Windows-AppConsult-Tools-DesktopBridgeRePack) that can help you reducing the required steps to create the packages. You can find a detailed [blog post](https://blogs.msdn.microsoft.com/appconsult/2017/08/07/unpack-modify-repack-sign-appx/) in our AppConsult blog. I won't use these script in order to display the basic steps.
 
 ![x64 build](images/mplogas_x64.run.png).
 

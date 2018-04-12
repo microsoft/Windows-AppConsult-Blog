@@ -40,7 +40,7 @@ This will generate an ApplicationId, which we will need later on. Also, we need 
 
 ### The part that involves Visual Studio
 
-Testing and debugging scripts isn't really one of Unity's strengths, especially when dealing with plugins. I've decided to debug and test my library on the lens in a simple UWP environment first. This allows much quicker prototyping. The UWP code is (as usual) available on GitHub, alongside with the Unity project and the placeholder plugin.
+Testing and debugging scripts isn't really one of Unity's strengths, especially when dealing with plugins. I've decided to debug and test my library on the lens in a simple UWP environment first. This allows much quicker prototyping. The UWP code is (as usual) available on [GitHub](https://github.com/Microsoft/Windows-AppConsult-Samples-MixedReality/tree/master/Blog-MsGraph), along with the Unity project and the placeholder plugin.
 
 *A small note on the sample code: almost all of my method signatures accept an ```Action<string>``` callback. I wouldn't normally do this in LoB application development where I can use IoC to inject the logging framework of my choice on instantiation. In Unity, ctor injection isn't really a thing. The logging callback seems to be the most clean and obvious approach to me for this sample.*
 
