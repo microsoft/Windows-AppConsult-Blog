@@ -1,6 +1,6 @@
-﻿﻿# Add Push Notifications to your app the easy way with Partner Center + Microsoft Store Services SDK
+﻿﻿[//]: <> (# Add Push Notifications to your app the easy way with Partner Center + Microsoft Store Services SDK)
 
-<img  style="margin:0px 15px 0px 0px;float:left" alt="halloween sale" src="images/jack1.jpg" height="50%" width="50%">
+<img  alt="halloween sale" src="https://msdnshared.blob.core.windows.net/media/2018/10/jack1.jpg" height="75%" width="75%">
 
 What if I told you that you could implement Windows toast and tile notifications with just two lines of code? Would you be interested?
   
@@ -10,11 +10,11 @@ What if I told you that you could do this in your progressive web app, UWP or Wi
 
 With the combination of the [Engagement feature of Partner Center](https://docs.microsoft.com/en-us/windows/uwp/publish/send-push-notifications-to-your-apps-customers) and the [Microsoft Store Services SDK](https://docs.microsoft.com/en-us/windows/uwp/mosnetize/microsoft-store-services-sdk) you can easily add Push Notifications to your [Windows Progressive Web App](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps) (PWA), [UWP](https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide), or [Desktop Bridge - Win32 app](https://aka.ms/desktopbridge).
 
-## <a name="powerfulpush"></a>Powerful Push with Windows Notification Services<img src="images/power-button40.png" height="40px" width="40px" align="left"/>
+## <a name="powerfulpush"></a>Powerful Push with Windows Notification Services<img src="https://msdnshared.blob.core.windows.net/media/2018/10/power-button40.png" height="40px" width="40px" align="left"/>
 
 Push notifications in Windows are very powerful and flexible allowing you to target specific information to specific users. This, however, requires you integrate with the Windows Notifications Service (WNS), set up a server app to send notifications and add code to your client application that registers with WNS. While this gives your business flexibility and one to one targeting, it may be more than what you need. For an excellent walkthrough of setting up WNS Push Notifications, see this post, [Push notifications in a PWA running on Windows 10](https://blogs.msdn.microsoft.com/appconsult/2018/06/07/push-notifications-in-a-pwa-running-on-windows-10/) written by [Matteo Pagani](https://twitter.com/QmatteoQ).
 
-## Easy Push with Microsoft Store Services Notifications<img src="images/easybutton100.png" height="40px" width="40px" align="left"/>
+## Easy Push with Microsoft Store Services Notifications<img src="https://msdnshared.blob.core.windows.net/media/2018/10/easybutton100.png" height="40px" width="40px" align="left"/>
 
 In contrast to 'WNS', 'Microsoft Store Services Notifications' sends general toast and tile updates to user groups you define. This can be:
 
@@ -34,7 +34,7 @@ Microsoft Store Services notifications also support [interactive toast messages]
 
 Microsoft Store Services notifications can't send information customized for a specific user. For these types of notifications, see ['Powerful Push'](#powerfulpush) above.
 
-## Let's see the code!<img src="images/sourcecode.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/>
+## Let's see the code!<img src="https://msdnshared.blob.core.windows.net/media/2018/10/sourcecode.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/>
 
 To implement the `Microsoft Store Services notifications` you will:
 
@@ -42,7 +42,7 @@ To implement the `Microsoft Store Services notifications` you will:
 
 2) Add a Reference to the ```Microsoft.Services.Store.SDK``` in your project. See highlighted below:
 
-![reference to SDK](Images/reference1.png)
+![reference to SDK](https://msdnshared.blob.core.windows.net/media/2018/10/reference1.png)
 
 3) <a name="registrationcode"></a>Add the following code to the Start up of your app:
 
@@ -63,7 +63,7 @@ var res = await engagementManager.RegisterNotificationChannelAsync();
 
    7.1. In `Partner Center`, select `Engage` and you should see the `Notifications` page as shown below.
 
-   ![Partner Center Engagement with Push Notifications](images/devcenternotificationspage.png)
+   ![Partner Center Engagement with Push Notifications](https://msdnshared.blob.core.windows.net/media/2018/10/devcenternotificationspage.png)
 
    7.2. Click `New Notification`
 
@@ -71,7 +71,7 @@ var res = await engagementManager.RegisterNotificationChannelAsync();
 
    7.4. From the drop down, select the app or apps to send notifications. See screenshot below:
 
-   ![note drop](Images/NoteDrop.png)
+   ![note drop](https://msdnshared.blob.core.windows.net/media/2018/10/NoteDrop.png)
 
    7.5 Here are some sample values for this toast notification:
 
@@ -104,7 +104,7 @@ No? Here are some things to check:
 * Does the app's [identity](https://docs.microsoft.com/en-us/windows/uwp/publish/view-app-identity-details) match it's definition in Partner Center?
 * Are you sending the notification to the correct app?
 
-## How about a sample?<img src="images/github.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/>
+## How about a sample?<img src="https://msdnshared.blob.core.windows.net/media/2018/10/github.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/>
 
 In the following steps, I'll describe the code found here: [https://github.com/Microsoft/Windows-AppConsult-samples-PWA/tree/master/DevCenterNotifications-PWA](https://github.com/Microsoft/Windows-AppConsult-samples-PWA/tree/master/DevCenterNotifications-PWA)
 

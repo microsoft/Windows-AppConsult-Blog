@@ -1,0 +1,81 @@
+<img alt="halloween sale" src="https://msdnshared.blob.core.windows.net/media/2018/10/jack1.jpg">
+<p>What if I told you that you could implement Windows toast and tile notifications with just two lines of code? Would you be interested?</p>
+<p>What if I told you that you didn&#39;t have to implement any server side code? Are you more interested?</p>
+<p>What if I told you that you could do this in your progressive web app, UWP or Win 32 app? Is your interest now off the charts?? If so, read on!</p>
+<p>With the combination of the <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/send-push-notifications-to-your-apps-customers">Engagement feature of Partner Center</a> and the <a href="https://docs.microsoft.com/en-us/windows/uwp/mosnetize/microsoft-store-services-sdk">Microsoft Store Services SDK</a> you can easily add Push Notifications to your <a href="https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps">Windows Progressive Web App</a> (PWA), <a href="https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide">UWP</a>, or <a href="https://aka.ms/desktopbridge">Desktop Bridge - Win32 app</a>.</p>
+<h2 id="a-name-powerfulpush-apowerful-push-with-windows-notification-servicesimg-src-https-msdnshared-blob-core-windows-net-media-2018-10-power-button40-png-height-40px-width-40px-align-left-"><a name="powerfulpush"></a>Powerful Push with Windows Notification Services<img src="https://msdnshared.blob.core.windows.net/media/2018/10/power-button40.png" height="40px" width="40px" align="left"/></h2>
+<p>Push notifications in Windows are very powerful and flexible allowing you to target specific information to specific users. This, however, requires you integrate with the Windows Notifications Service (WNS), set up a server app to send notifications and add code to your client application that registers with WNS. While this gives your business flexibility and one to one targeting, it may be more than what you need. For an excellent walkthrough of setting up WNS Push Notifications, see this post, <a href="https://blogs.msdn.microsoft.com/appconsult/2018/06/07/push-notifications-in-a-pwa-running-on-windows-10/">Push notifications in a PWA running on Windows 10</a> written by <a href="https://twitter.com/QmatteoQ">Matteo Pagani</a>.</p>
+<h2 id="easy-push-with-microsoft-store-services-notificationsimg-src-https-msdnshared-blob-core-windows-net-media-2018-10-easybutton100-png-height-40px-width-40px-align-left-">Easy Push with Microsoft Store Services Notifications<img src="https://msdnshared.blob.core.windows.net/media/2018/10/easybutton100.png" height="40px" width="40px" align="left"/></h2>
+<p>In contrast to &#39;WNS&#39;, &#39;Microsoft Store Services Notifications&#39; sends general toast and tile updates to user groups you define. This can be:</p>
+<ul>
+<li>All of the users of all of your apps and games.</li>
+<li>All of the users of a specific app.</li>
+<li>All of the users of some of your apps.</li>
+<li><p>Subsets of the above, <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/create-customer-groups">grouped by demographic criteria</a> you specify. <strong>The marketers in your organization will love this feature.</strong> For example, you may want to reward your big spending customers with a <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/generate-promotional-codes">promotional code</a> that can be used for a free license for a new app you are releasing. You may want to up-sell your low spending customers on in app purchases.</p>
+<p>Note that with Microsoft Store Services notifications you don&#39;t send specific data to specific users. This is very useful for:</p>
+</li>
+<li><p>Cross promoting your apps. For example, if you have launched a new app, ask users of your other apps to check it out.</p>
+</li>
+<li>Letting your users know when your apps or IAP go on <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/set-and-schedule-app-pricing">sale</a>.</li>
+<li>Requesting feedback.</li>
+<li>Sending ad hoc announcements and information to your users. For example, providing down time schedules, new feature announcements, or service alerts.</li>
+</ul>
+<p>Microsoft Store Services notifications also support <a href="https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/adaptive-interactive-toasts">interactive toast messages</a> which allow users to interact with your app without having to launch it. This requires adding the client code to support the interaction.</p>
+<p>Microsoft Store Services notifications can&#39;t send information customized for a specific user. For these types of notifications, see <a href="#powerfulpush">&#39;Powerful Push&#39;</a> above.</p>
+<h2 id="let-s-see-the-code-img-src-https-msdnshared-blob-core-windows-net-media-2018-10-sourcecode-png-height-40px-width-40px-align-left-style-margin-0px-5px-0px-0px-">Let&#39;s see the code!<img src="https://msdnshared.blob.core.windows.net/media/2018/10/sourcecode.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/></h2>
+<p>To implement the <code>Microsoft Store Services notifications</code> you will:</p>
+<p>1) Install the <a href="https://docs.microsoft.com/en-us/windows/uwp/mosnetize/microsoft-store-services-sdk">Microsoft Store Services SDK</a></p>
+<p>2) Add a Reference to the <code>Microsoft.Services.Store.SDK</code> in your project. See highlighted below:</p>
+<p><img src="https://msdnshared.blob.core.windows.net/media/2018/10/reference1.png" alt="reference to SDK"></p>
+<p>3) <a name="registrationcode"></a>Add the following code to the Start up of your app:</p>
+<pre><code class="lang-cs">// Setup connection between app and Microsoft Store Services
+StoreServicesEngagementManager engagementManager = StoreServicesEngagementManager.GetDefault();
+var res = await engagementManager.RegisterNotificationChannelAsync();
+</code></pre>
+<p>4) Associate your app with the Store in Visual Studio. Go to the Project menu -> Store -> Associate App with Store</p>
+<p>5) Publish your app to Partner Center using the <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/choose-visibility-options">&#39;Limited Audience&#39; or<br>&#39;Hidden&#39; visibility options</a>. You need to do this because in order to setup the push notifications Partner Center will need to explicitly reference your app. In order to do this, your app must be published with a reference to the <code>Microsoft.Services.Store.SDK</code>. Note that the publishing process can take up to three business days.</p>
+<p>6) Once your app has published, you don&#39;t need to install it from the Store. You can continue to develop the app - just make sure the <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/view-app-identity-details">identity</a> of the app matches what you have submitted to Partner Center.</p>
+<p>7) In the <code>Engagement</code> section of <code>Partner Center</code> define and send your Toast and Tile Push Notifications.</p>
+<p>   7.1. In <code>Partner Center</code>, select <code>Engage</code> and you should see the <code>Notifications</code> page as shown below.</p>
+<p>   <img src="https://msdnshared.blob.core.windows.net/media/2018/10/DevCenterNotificationsPage.png" width="75%" height="75%" alt="Partner Center Engagement with Push Notifications"></p>
+<p>   7.2. Click <code>New Notification</code></p>
+<p>   7.3. Click <code>Blank Toast</code>, <code>OK</code></p>
+<p>   7.4. From the drop down, select the app or apps to send notifications. See screenshot below:</p>
+<p>   <img src="https://msdnshared.blob.core.windows.net/media/2018/10/NoteDrop.png" alt="note drop"></p>
+<p>   7.5 Here are some sample values for this toast notification:</p>
+<p>   <strong>Name:</strong> My First Engagement Push</p>
+<p>   <strong>Customer Groups:</strong> All Users</p>
+<p>   <strong>Send Notification Immediately:</strong> Check</p>
+<p>   <strong>Notification Never Expires:</strong> Check</p>
+<p>   <strong>Language:</strong> English (default)</p>
+<p>   <strong>Activation Type:</strong> Foreground</p>
+<p>   <strong>Duration:</strong> Short</p>
+<p>   <strong>Scenario:</strong> Default</p>
+<p>   <strong>Visual (text 1):</strong> Hello from My App!</p>
+<p>   Click <code>Send</code></p>
+<p>Your notification will be sent immediately it will take up to one minute to receive the notification. Note that the app&#39;s registration code <a href="#registrationcode">(Step 3)</a> should have been run at least once. Note that the app doesn&#39;t need to be running in order to receive the notification.</p>
+<p>Did it arrive? Yes. High-Five!<br>No? Here are some things to check:</p>
+<ul>
+<li>Did the registration code run?</li>
+<li>Does the app&#39;s <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/view-app-identity-details">identity</a> match it&#39;s definition in Partner Center?</li>
+<li>Are you sending the notification to the correct app?</li>
+</ul>
+<h2 id="how-about-a-sample-img-src-https-msdnshared-blob-core-windows-net-media-2018-10-github-png-height-40px-width-40px-align-left-style-margin-0px-5px-0px-0px-">How about a sample?<img src="https://msdnshared.blob.core.windows.net/media/2018/10/github.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/></h2>
+<p>In the following steps, I&#39;ll describe the code found here: <a href="https://github.com/Microsoft/Windows-AppConsult-samples-PWA/tree/master/DevCenterNotifications-PWA">https://github.com/Microsoft/Windows-AppConsult-samples-PWA/tree/master/DevCenterNotifications-PWA</a></p>
+<p>This sample implements the registration code <a href="#registrationcode">(step 3)</a> in a Windows Runtime Component (<strong>PushWinRTComponent</strong>). For easy integration, free free to use it.</p>
+<p>PushWinRTComponent exposes the method <code>PushNotifications.init()</code> that will be called via JavaScript as follows:</p>
+<pre><code class="lang-javascript">// index.html
+// Set up Push notifications
+if (typeof Windows !== &#39;undefined&#39; &amp;&amp;
+  typeof Windows.UI !== &#39;undefined&#39; &amp;&amp;
+  typeof Windows.UI.Notifications !== &#39;undefined&#39;) {
+  PushWinRTComponent.PushNotifications.init().then(
+    function (result) {
+      console.log("push init result: " + result);
+    });
+}
+</code></pre>
+<p>Happy Coding!</p>
+<p>References:</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/uwp/publish/send-push-notifications-to-your-apps-customers">Send notifications to your app&#39;s customers</a></p>
+<p><a href="https://blogs.msdn.microsoft.com/appconsult/2018/06/07/push-notifications-in-a-pwa-running-on-windows-10/">Push Notifications in a PWA Running on Windows 10</a></p>
